@@ -129,17 +129,26 @@ $arrayAuto = [
 
 var_dump($arrayAuto);
 echo "<hr>";
+
 // Agrego nombre del dueño con array_unshift() 
 // http://php.net/manual/en/function.array-unshift.php
-array_unshift($arrayAuto, "nombre_del_dueno");
-
+// array_unshift($arrayAuto, "Jorge Rial");
+$arrayAuto[0] = "Jorge Rial";
 var_dump($arrayAuto);
 echo "<hr>";
 
 // Agrego aseguradora a la posicion 14 usando una forma diferente
-$arrayAuto[14] = "aseguradora";
+$arrayAuto[14] = "La Caja";
 var_dump($arrayAuto);
 echo "<hr>";
 
 $arrayAuto["poliza"] = "33ed44545tg";
 var_dump($arrayAuto);
+
+$arrayAuto['patente'] = "666tkb";
+var_dump($arrayAuto);
+echo "<hr>";
+
+$arrayAuto[0] = "Marcelo Tinelli";
+var_dump($arrayAuto);
+echo "<hr>";
