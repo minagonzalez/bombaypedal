@@ -9,7 +9,7 @@ function dd(...$param)
 // Errores en if ternario
 function old($field)
 {
-    if($_POST[$field]){
+    if(isset($_POST[$field])){
         return $_POST[$field];
     }
 }
