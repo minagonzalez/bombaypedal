@@ -1,11 +1,11 @@
 <?php
 
-require_once('helpers.php');
+require 'helpers.php';
 
 function validate($data)
 {
     $errors = [];
-    //si me manda username vacio, dar error
+
     $username = trim($data['username']);
     if($username == "") {
         $errors['username'] = "Capo me dejaste el username vacio";
@@ -35,4 +35,38 @@ function validate($data)
     return $errors;
 
 }
+function saveAvatar($usuario) 
+{
 
+    $errores = [];
+    
+    $id = $usuario["id"];
+
+    if ($_FILES["avatar"]["error"] == UPLOAD_ERR_OK) {
+
+        $nombre = $_FILES["avatar"]["name"];
+        $archivo = $_FILES["avatar"]["tmp_name"];
+
+        $ext = pathinfo($nombre, PATHINFO_EXTENSION);
+
+        if ($ext != "jpg" && $ext != "png" && $ext != "jpeg") {
+            $errores["avatar"] = "Solo acepto formatos jpg y png";
+            return $errores;
+        }
+
+        $miArchivo = dirname(__FILE__);
+
+        $miArchivo = $miArchivo . "/img/";
+
+        $miArchivo = $miArchivo. "perfil" . $id . "." . $ext;
+
+        move_uploaded_file($archivo, $miArchivo);
+
+    } else {
+
+        $errores["avatar"] = "Hubo un error al procesar el archivo";
+
+    }
+
+    return $errores;
+}
