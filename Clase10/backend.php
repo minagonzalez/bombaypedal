@@ -19,5 +19,6 @@
         <h1>HOLA ADMIN!</h1>
 
     </div>
+    <?php include_once 'scripts.php'; ?>
 </body>
 </html>

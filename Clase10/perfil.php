@@ -1,18 +1,7 @@
 <?php
     require 'funciones.php';
 
-    if($_SESSION) {
-        $usuario = buscamePorEmail($_SESSION["email"]);
-        $username = $usuario['email'];
-        
-        $id = $usuario["id"];
-
-        if (isset(glob("img/perfil$id.*")[0])) {
-            $archivo = glob("img/perfil$id.*")[0];
-        } else {
-            $archivo = null;
-        }  
-    }
+    //...
 
 ?>  
 <!DOCTYPE html>
@@ -20,10 +9,13 @@
     <?php require 'head.php';?>
     <body>
         <div class="container">
+
             <?php require 'navbar.php'; ?>
+
             <div class="alert alert-danger" role="alert">
                 No estas autorizado en este sistema <a href="register.php" class="alert-link">Registrate!</a>
             </div>
+
             <div class="row">
                 <div class="card col-4">
                 
@@ -39,5 +31,8 @@
                 </div>
             </div>
         </div>
+
+        <?php include_once 'scripts.php'; ?>
+        
     </body>
 </html>

@@ -1,7 +1,6 @@
 <?php
 
 require 'funciones.php';
-require 'paises.php';
 
 if($_POST){
     //...
@@ -29,19 +28,17 @@ if($_POST){
                         </div>
                     <?php endif;?> 
                 </div>
+
                 <div class="form-group">
                     <label for="mail">E-Mail: </label>
-                    <input type="text" name="email" value="<?=(isset($errors['email'])) ? "" : old('email'); ?>">
-                <?php if(isset($errors['email'])): ?>
-                    <div class="alert alert-danger">
-                        <strong><?=$errors['email']; ?></strong>
-                    </div>
-                <?php endif;?>
+                    <input type="text" name="email" value="">
                 </div>
+
                 <div class="form-group">
                     <label for="avatar">Avatar</label>
                     <input type="file" name="avatar">
                 </div>
+
                 <div class="form-group">
                     <label for="password">Password: </label>
                     <input type="password" name="password">
@@ -59,23 +56,6 @@ if($_POST){
                     <label for="cpasswd">Repetir Password: </label>
                     <input type="password" name="cpassword">
                 </div>
-                <div class="form-control">
-                    <label for="paises">Seleccione su Pais:</label>
-                    <select name="pais" id="">
-                        <option hidden selected disabled value="<?=isset($errors['pais']) ? $errors['pais'] : old('pais') ?>">Seleccione su pais...</option>
-                    <?php foreach($paises as $pais): ?>
-                        <option value="<?=$pais?>">
-                            <?=$pais?>
-                        </option>
-                    <?php endforeach; ?>
-
-                    </select>
-                <?php if(isset($errors['pais'])): ?>
-                    <div class="alert alert-danger">
-                        <strong><?=$errors['pais']; ?></strong>
-                    </div>
-                <?php endif;?>
-                </div>
                 <?php if(isset($errors['confirm'])): ?>
                     <div class="alert alert-danger">
                         <strong><?=$errors['confirm']; ?></strong>
@@ -90,5 +70,8 @@ if($_POST){
                 </div>
             </form>
         </div>
+        
+        <?php include_once 'scripts.php'; ?>
+
     </body>
 </html>
