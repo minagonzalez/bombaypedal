@@ -1,15 +1,15 @@
 <?php
 
-function dd(... $params)
+function dd(...$param)
 {
     echo "<pre>";
-    die(var_dump($params));
+    die(var_dump($param));
 }
 
-function old($param)
+function old($field)
 {
-    if($_POST[$param]){
-        return $_POST[$param];
+    if($_POST[$field]){
+        return $_POST[$field];
     }
 }
 

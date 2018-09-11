@@ -26,8 +26,11 @@
             </div>
             <div class="row">
                 <div class="card col-4">
-                    <img class="card-img-top" src="" alt="Card image cap">
-                    <img class="card-img-top" src="img/default.jpg" alt="Card image cap">
+                
+                    <img class="card-img-top" src="" alt="avatar">
+
+                    <img class="card-img-top" src="img/default.jpg" alt="avatar default">
+                    
                     <div class="card-body">
                         <h5 class="card-title"><?="Bienvenido $username!" ?></h5>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, adipisci.</p>

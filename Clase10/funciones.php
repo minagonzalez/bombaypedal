@@ -35,6 +35,7 @@ function validate($data)
     return $errors;
 
 }
+
 function saveAvatar($usuario) 
 {
 

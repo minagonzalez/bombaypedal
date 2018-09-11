@@ -1,7 +1,7 @@
 <?php
 
-require('funciones.php');
-require('paises.php');
+require 'funciones.php';
+require 'paises.php';
 
 if($_POST){
     //...
