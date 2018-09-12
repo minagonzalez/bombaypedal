@@ -1,10 +1,6 @@
 <?php
     require 'funciones.php';
 
-    // if(guest()){
-    //     redirect('register.php');
-    // }
-
     if(isset($_SESSION['username'])) {
         $username = $_SESSION['username'];
     }
@@ -17,6 +13,7 @@
         <div class="container">
 
             <?php require 'navbar.php'; ?>
+            
             <?php if(guest()):?>
             <div class="alert alert-danger" role="alert">
                 No estas autorizado en este sistema <a href="register.php" class="alert-link">Registrate!</a>

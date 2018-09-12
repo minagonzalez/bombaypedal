@@ -31,6 +31,10 @@ function guest()
     return !check();
 }
 
+function checkRole()
+{
+    // ...
+}
 
 
 

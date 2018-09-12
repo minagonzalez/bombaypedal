@@ -78,7 +78,8 @@ function createUser($data)
     $usuario = [
         'username' => $data['username'],
         'email' => $data['email'],
-        'password' => password_hash($data['password'], PASSWORD_DEFAULT)
+        'password' => password_hash($data['password'], PASSWORD_DEFAULT),
+        'role' => 1
     ];
 
     $usuario['id'] = idGenerate();
