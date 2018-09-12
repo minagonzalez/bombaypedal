@@ -1,7 +1,13 @@
 <?php
     require 'funciones.php';
 
-    //...
+    // if(guest()){
+    //     redirect('register.php');
+    // }
+
+    if(isset($_SESSION['username'])) {
+        $username = $_SESSION['username'];
+    }
 
 ?>  
 <!DOCTYPE html>
@@ -11,11 +17,11 @@
         <div class="container">
 
             <?php require 'navbar.php'; ?>
-
+            <?php if(guest()):?>
             <div class="alert alert-danger" role="alert">
                 No estas autorizado en este sistema <a href="register.php" class="alert-link">Registrate!</a>
             </div>
-
+            <?php else: ?>
             <div class="row">
                 <div class="card col-4">
                 
@@ -30,6 +36,7 @@
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
         </div>
 
         <?php include_once 'scripts.php'; ?>

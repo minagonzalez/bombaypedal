@@ -2,9 +2,18 @@
 
 require 'funciones.php';
 
-if($_POST){
-    //...
+if(check()) {
+    redirect('perfil.php');
+}
 
+if($_POST){
+ 
+    $errors = validate($_POST);
+    if(count($errors) == 0) {
+        $usuario = createUser($_POST);
+        saveUser($usuario);
+        redirect('login.php');
+    }
 }
    
 ?>
@@ -21,7 +30,7 @@ if($_POST){
             <form class="form form-group row col-5 offset-2" style="padding-top: 55px;" action="" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="nombre">Username: </label>
-                    <input type="text" name="username" value="<?=isset($errors['username']) ? $errors['username'] : old('username'); ?>">
+                    <input type="text" name="username" value="<?=isset($errors['username']) ? "" : old('username'); ?>">
                     <?php if(isset($errors['username'])): ?>
                         <div class="alert alert-danger">
                             <strong><?=$errors['username']; ?></strong>
@@ -30,10 +39,14 @@ if($_POST){
                 </div>
 
                 <div class="form-group">
-                    <label for="mail">E-Mail: </label>
-                    <input type="text" name="email" value="">
+                    <label for="email">E-Mail: </label>
+                    <input type="email" name="email" value="">
                 </div>
-
+                    <?php if(isset($errors['email'])): ?>
+                        <div class="alert alert-danger">
+                            <strong><?=$errors['email']; ?></strong>
+                        </div>
+                    <?php endif;?> 
                 <div class="form-group">
                     <label for="avatar">Avatar</label>
                     <input type="file" name="avatar">

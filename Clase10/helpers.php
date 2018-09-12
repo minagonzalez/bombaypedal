@@ -1,4 +1,5 @@
 <?php
+
 // Debug
 function dd(...$param)
 {
@@ -13,6 +14,49 @@ function old($field)
         return $_POST[$field];
     }
 }
+
+function redirect($url)
+{
+    header('Location: ' . $url);
+    exit;
+}
+
+function check()
+{
+    return isset($_SESSION['username']);
+}
+
+function guest()
+{
+    return !check();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
