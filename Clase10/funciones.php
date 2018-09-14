@@ -69,14 +69,22 @@ function validateAvatar($data)
     return $errores;
 }
 
+// Funcion para obtener el nombre que el avatar (foto de perfil) de un usuario va a tener DEL LADO DE MI SISTEMA
+// Con esto lograriamos guardar ese nombre en la key Avatar de nuestro array de usuario, para despues llamarlo en caso de 
+// querer mostrarlo en su perfil
 function photoPath($data)
 {
-
+    // Guardame el username en la variable $username
     $username = $data["username"];
+    // Temporalmente, asigname a $nombre lo que llegue en $_FILES['avatar']['name]...
     $nombre = $_FILES["avatar"]["name"];
+    // y haciendo uso de $nombre, asigna a $ext lo que devuelva la funcion pathinfo() a la cual
+    // le paso como parametro el mismo, y tambien la constante PATHINFO_EXTENSION
     $ext = pathinfo($nombre, PATHINFO_EXTENSION);
 
+    //Generame una variable $miArchivo concatenando la palabra perfil, mas el username, mas un PUNTO, mas la EXTENSION...
     $miArchivo = "perfil" . $username . "." . $ext;
+    // y devolvemelo
     return $miArchivo;
 }
 
@@ -120,10 +128,9 @@ function saveUser($user)
     $jsonUser = json_encode($user);
     file_put_contents('users.json', $jsonUser . PHP_EOL, FILE_APPEND);
 }
+// Manejo de base de datos
 
-// traerTodaLaBase = conexion
-// buscamePorEmail 
-
+// Emulamos una conexion a la base, trayendo el JSON y generando un array asociativo de usuarios
 function dbConnect()
 {
     $db = file_get_contents('users.json');
@@ -137,15 +144,20 @@ function dbConnect()
     return $usersArray;
 
 }
-
+// Busqueda x email
 function dbEmailSearch($email)
 {
+    // Donde buscamos x email a un usuario? En el array que genera la conexion emulada!
     $users = dbConnect();
+    // POR CADA $users COMO $user...
     foreach($users as $user) {
+        // SI el email de algun $user es === a $email (lo que lleva por parametro)
         if($user['email'] === $email) {
+            // Devolveme el $user
             return $user;
         }
     }
+    //Si con lo de arriba no paso nada, devolveme null
     return null;
 }
 
@@ -165,8 +177,6 @@ function logout()
     redirect('register.php');
 
 }
-
-//logout();
 
 
 
