@@ -23,7 +23,7 @@ function redirect($url)
 
 function check()
 {
-    return isset($_SESSION['username']);
+    return isset($_SESSION['email']);
 }
 
 function guest()
@@ -31,9 +31,14 @@ function guest()
     return !check();
 }
 
-function checkRole()
+function checkRole($email)
 {
-    // ...
+    $user = dbEmailSearch($email);
+    if($user['role'] == 7) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 

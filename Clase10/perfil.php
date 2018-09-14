@@ -1,8 +1,12 @@
 <?php
     require 'funciones.php';
 
-    if(isset($_SESSION['username'])) {
-        $username = $_SESSION['username'];
+    if(isset($_SESSION['email'])) {
+        $user = dbEmailSearch($_SESSION['email']);
+        $username = $user['username'];
+        if(array_key_exists('avatar', $user)){
+            $avatar = $user['avatar'];
+        }
     }
 
 ?>  
@@ -21,10 +25,13 @@
             <?php else: ?>
             <div class="row">
                 <div class="card col-4">
-                
-                    <img class="card-img-top" src="" alt="avatar">
 
+                    <?php if(!isset($user['avatar'])):?>
                     <img class="card-img-top" src="img/default.jpg" alt="avatar default">
+                    <?php else: ?>
+                    <img class="card-img-top" src="img/<?=$avatar?>" alt="avatar">
+                    <?php endif;?>
+
                     
                     <div class="card-body">
                         <h5 class="card-title"><?="Bienvenido $username!" ?></h5>

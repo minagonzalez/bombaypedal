@@ -1,5 +1,9 @@
 <?php
+require 'funciones.php';
 
+if(checkRole($_SESSION['email']) == false) {
+    redirect('perfil.php');
+}
     
 ?>
 <!DOCTYPE html>
@@ -12,9 +16,9 @@
     
         <?php require 'navbar.php' ?>
 
-        <div class="alert alert-danger" role="alert">
+        <!-- <div class="alert alert-danger" role="alert">
             No estas autorizado en este sistema <a href="register.php" class="alert-link">Registrate!</a>
-        </div>
+        </div> -->
 
         <h1>HOLA ADMIN!</h1>
 

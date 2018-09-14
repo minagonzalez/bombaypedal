@@ -1,16 +1,22 @@
 <?php
-
 require 'funciones.php';
 
 if(check()) {
     redirect('perfil.php');
 }
 
-if($_POST){
- 
+if($_POST) {
     $errors = validate($_POST);
-    if(count($errors) == 0) {
-        $usuario = createUser($_POST);
+    $usuario = createUser($_POST);
+    
+    if($_FILES['avatar']['error'] == 0) {
+        $avatarErrors = validateAvatar($_POST);
+        $usuario['avatar'] = photoPath($_POST);
+        if(!empty($avatarErrors)) {
+            $errors = array_merge($errors, $avatarErrors); 
+        }
+    }
+    if(count($errors) == 0) {  
         saveUser($usuario);
         redirect('login.php');
     }

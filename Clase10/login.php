@@ -1,23 +1,20 @@
 <?php
+require 'funciones.php';
 
-    require 'funciones.php';
+if(check()) {
+    redirect('perfil.php');
+}
 
-    if(check()) {
-        redirect('perfil.php');
+if($_POST) {
+    $usuario = dbEmailSearch($_POST['email']);
+    if($usuario !== null) {
+        if(password_verify($_POST['password'], $usuario['password']) == true) {
+            login($usuario);
+            redirect('perfil.php');
+        } 
     }
-
-    if($_POST) {
-        $usuario = dbEmailSearch($_POST['email']);
-        if($usuario !== null) {
-            if(password_verify($_POST['password'], $usuario['password']) == true) {
-                login($usuario);
-                // var_dump($_COOKIE);
-                // exit;
-                redirect('perfil.php');
-            } 
-        }
-        
-    }
+    
+}
 
 ?>  
 <!DOCTYPE html>

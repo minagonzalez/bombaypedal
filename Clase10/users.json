@@ -1,3 +1,2 @@
-{"username":"rodo","email":"rodo@digitalhouse.com","password":"$2y$10$llptioFui3xYzDxpOXBl5eFGNB1QliZV2MOPYENSo4NIgsE.xf\/Ii","role":1,"id":1}
-{"username":"daniel","email":"dfuentes@gmail.com","password":"$2y$10$EOjI6CFWFsVqhjjFyq2VQOgKklrmR4kOyuIpdBoBbNcfk8GYfYN3K","role":1,"id":2}
-{"username":"pedro365","email":"pedro365@gmail.com","password":"$2y$10$haPw3cjtUYfrWvgt1f8pdeB1pTK1ZW\/SDd5t1rSINsFzKCVvm8fV.","role":1,"id":3}
+{"username":"admin","email":"admin@dh.com","password":"$2y$10$nhBjnVsM\/vjlS9QjyYRine4E0aq\/J1ifF6Ux4OHBQqJkDmIE87vmu","role":1,"id":1,"avatar":"perfiladmin.jpg"}
+{"username":"pablo","email":"pablo@yahoo.com","password":"$2y$10$PiN\/Jwm9nlfqlVbpPwCJcuL3kaVDJjf93ynkv5IKbKgMSmtTdFoXi","role":1,"id":2}

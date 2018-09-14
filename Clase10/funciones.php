@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require 'helpers.php';
 
@@ -40,38 +41,46 @@ function validate($data)
 
 }
 
-function saveAvatar($usuario) 
+function validateAvatar($data) 
 {
     $errores = [];
+
+    $username = $data["username"];
     
-    $id = $usuario["id"];
-
-    if ($_FILES["avatar"]["error"] == UPLOAD_ERR_OK) {
-
+    if($_FILES["avatar"]["error"] == UPLOAD_ERR_OK) {
         $nombre = $_FILES["avatar"]["name"];
         $archivo = $_FILES["avatar"]["tmp_name"];
-
+        
         $ext = pathinfo($nombre, PATHINFO_EXTENSION);
 
-        if ($ext != "jpg" && $ext != "png" && $ext != "jpeg") {
+        if($ext != "jpg" && $ext != "png" && $ext != "jpeg") {
             $errores["avatar"] = "Solo acepto formatos jpg y png";
             return $errores;
         }
 
         $miArchivo = dirname(__FILE__);
         $miArchivo = $miArchivo . "/img/";
-        $miArchivo = $miArchivo. "perfil" . $id . "." . $ext;
-
+        $miArchivo = $miArchivo. "perfil" . $username . "." . $ext;
         move_uploaded_file($archivo, $miArchivo);
 
     } else {
-
         $errores["avatar"] = "Hubo un error al procesar el archivo";
-
     }
-
     return $errores;
 }
+
+function photoPath($data)
+{
+
+    $username = $data["username"];
+    $nombre = $_FILES["avatar"]["name"];
+    $ext = pathinfo($nombre, PATHINFO_EXTENSION);
+
+    $miArchivo = "perfil" . $username . "." . $ext;
+    return $miArchivo;
+}
+
+
 
 function createUser($data)
 {
@@ -142,8 +151,8 @@ function dbEmailSearch($email)
 
 function login($user)
 {
-    $_SESSION['username'] = $user['username'];
-    setcookie('username', $user['username'], time() + 3600 * 24 * 7, "/");
+    $_SESSION['email'] = $user['email'];
+    setcookie('email', $user['email'], time() + 3600 * 24 * 7, "/");
 }
 
 function logout()
@@ -152,7 +161,7 @@ function logout()
         session_start();
     }
     session_destroy();
-    setcookie('username', null, time() -1);
+    setcookie('email', null, time() -1);
     redirect('register.php');
 
 }

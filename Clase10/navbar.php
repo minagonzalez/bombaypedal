@@ -11,9 +11,11 @@
             <?php else: ?>
 
             <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
-            
-            <li class="nav-item"><a class="nav-link" href="backend.php">Administrar</a></li>
 
+            <?php endif; ?>
+            
+            <?php if(checkRole($_SESSION['email']) == true): ?>
+            <li class="nav-item"><a class="nav-link" href="backend.php">Administrar</a></li>
             <?php endif; ?>
             
         </ul>
