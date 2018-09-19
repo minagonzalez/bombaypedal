@@ -14,8 +14,10 @@
 
             <?php endif; ?>
             
-            <?php if(checkRole($_SESSION['email']) == true): ?>
-            <li class="nav-item"><a class="nav-link" href="backend.php">Administrar</a></li>
+            <?php if(isset($_SESSION['email'])): ?>
+            <?php   if(checkRole($_SESSION['email']) == true): ?>
+                <li class="nav-item"><a class="nav-link" href="backend.php">Administrar</a></li>
+            <?php   endif; ?>
             <?php endif; ?>
             
         </ul>
