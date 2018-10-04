@@ -85,22 +85,14 @@ function validateAvatar($data)
     return $errores;
 }
 
-// Funcion para obtener el nombre que el avatar (foto de perfil) de un usuario va a tener DEL LADO DE MI SISTEMA
-// Con esto lograriamos guardar ese nombre en la key Avatar de nuestro array de usuario, para despues llamarlo en caso de 
-// querer mostrarlo en su perfil
 function photoPath($data)
 {
-    // Guardame el username en la variable $username
-    $username = $data["username"];
-    // Temporalmente, asigname a $nombre lo que llegue en $_FILES['avatar']['name]...
-    $nombre = $_FILES["avatar"]["name"];
-    // y haciendo uso de $nombre, asigna a $ext lo que devuelva la funcion pathinfo() a la cual
-    // le paso como parametro el mismo, y tambien la constante PATHINFO_EXTENSION
-    $ext = pathinfo($nombre, PATHINFO_EXTENSION);
 
-    //Generame una variable $miArchivo concatenando la palabra perfil, mas el username, mas un PUNTO, mas la EXTENSION...
+    $username = $data["username"];
+    $nombre = $_FILES["avatar"]["name"];
+    $ext = pathinfo($nombre, PATHINFO_EXTENSION);
     $miArchivo = "perfil" . $username . "." . $ext;
-    // y devolvemelo
+
     return $miArchivo;
 }
 
@@ -144,9 +136,7 @@ function saveUser($user)
     $jsonUser = json_encode($user);
     file_put_contents('users.json', $jsonUser . PHP_EOL, FILE_APPEND);
 }
-// Manejo de base de datos
 
-// Emulamos una conexion a la base, trayendo el JSON y generando un array asociativo de usuarios
 function dbConnect()
 {
     $db = file_get_contents('users.json');

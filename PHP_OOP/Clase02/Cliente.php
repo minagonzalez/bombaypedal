@@ -2,8 +2,8 @@
 
 //Defino variables privadas para la clase Cliente
 
-abstract class Cliente{
-  
+abstract class Cliente
+{
   protected $email;
   protected $pass;
   protected $cuenta;
