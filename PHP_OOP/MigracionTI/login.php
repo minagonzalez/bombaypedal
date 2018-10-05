@@ -1,15 +1,16 @@
 <?php
 require 'funciones.php';
+require 'loader.php';
 
-if(check()) {
+if(Auth::check()) {
     redirect('perfil.php');
 }
 
 if($_POST) {
-    $usuario = dbEmailSearch($_POST['email']);
-    if($usuario !== null) {
-        if(password_verify($_POST['password'], $usuario['password']) == true) {
-            login($usuario);
+    $user = $db->emailDbSearch($_POST['email']);
+    if($user !== null) {
+        if(password_verify($_POST['password'], $user['password']) == true) {
+            Auth::login();
             redirect('perfil.php');
         } 
     }

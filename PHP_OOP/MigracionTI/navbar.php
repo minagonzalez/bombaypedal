@@ -3,7 +3,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
 
-            <?php if(guest()): ?>
+            <?php if(Auth::guest()): ?>
 
             <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
             <li class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
@@ -15,7 +15,7 @@
             <?php endif; ?>
             
             <?php if(isset($_SESSION['email'])):
-                    if(checkRole($_SESSION['email']) == true): ?>
+                    if(Auth::checkRole($_SESSION['email']) == true): ?>
                 <li class="nav-item"><a class="nav-link" href="backend.php">Administrar</a></li>
             <?php endif; ?>
             <?php endif; ?>

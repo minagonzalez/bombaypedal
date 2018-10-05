@@ -3,7 +3,6 @@
 session_start();
 require 'helpers.php';
 
-
 function validarUsername($username)
 {
     $errores = [];

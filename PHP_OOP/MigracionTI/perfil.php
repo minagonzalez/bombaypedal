@@ -1,5 +1,6 @@
 <?php
     require 'funciones.php';
+    require 'loader.php';
 
     // if(guest()) {
     //     redirect('register.php');
@@ -7,7 +8,7 @@
     // si me llega una $_SESSION con la key 'email' seteada...
     if(isset($_SESSION['email'])) {
         // buscame el usuario por mail y guardalo en $user (necesitamos usar los otros datos y solamente tenemos el email guardado en session!)
-        $user = dbEmailSearch($_SESSION['email']);
+        $user = $db->emailDbSearch($_SESSION['email']);
         // asigname a $username el nombre de usuario
         $username = $user['username'];
         // Si tiene una foto de perfil, va a tener una key 'avatar' seteada...
@@ -26,7 +27,7 @@
 
             <?php require 'navbar.php'; ?>
             <?php //Checkeamos que no sea un GUEST, y en caso de serlo, error ?>
-            <?php if(guest()):?>
+            <?php if(Auth::guest()):?>
             <div class="alert alert-danger" role="alert">
                 No estas autorizado en este sistema <a href="register.php" class="alert-link">Registrate!</a>
             </div>

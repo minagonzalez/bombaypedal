@@ -5,7 +5,10 @@ require 'Classes/Auth.php';
 require 'Classes/JSONDB.php';
 require 'Classes/Validate.php';
 
-$email = "rodo@gmail.com";
+$db = new JSONDB('users.json');
+Auth::set();
+
+
 
 
 

@@ -21,12 +21,6 @@ function redirect($url)
     exit;
 }
 
-// checkeo si esta seteada la session como yo quiero que este en mi sistema 
-function check()
-{
-    return isset($_SESSION['email']);
-}
-
 // funcion para mostrar (o no) contenido a usuarios no registrados
 function guest()
 {

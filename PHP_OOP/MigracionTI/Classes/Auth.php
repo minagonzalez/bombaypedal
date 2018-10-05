@@ -3,12 +3,44 @@
 
 class Auth
 {
-    public function __construct()
+    public static function set()
     {
-        session_start();
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+    }
+    // 1 - Login
+    public static function login()
+    {
+        $_SESSION['email'] = $user['email'];
+        setcookie('email', $user['email'], time() + 3600 * 24 * 7, "/");
+    }
+    // 2 - Logout
+    public static function logout()
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        session_destroy();
+        setcookie('email', null, time() -1);
+    }
+    // 3 - Helper check
+    public static function check()
+    {
+        return isset($_SESSION['email']);
+    }
+    public static function guest()
+    {
+        return !self::check();
     }
 
-    // 1 - Login
-    // 2 - Logout
-    // 3 - Helper check
+    public static function checkRole(DB $db, $email)
+    {
+        $user = $db->emailDbSearch($email);
+        if ($user['role'] == 7) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
