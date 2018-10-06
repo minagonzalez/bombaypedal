@@ -43,10 +43,6 @@ class JSONDB extends DB
         file_put_contents($file, $jsonUser . PHP_EOL, FILE_APPEND);
     }
 
-    public function photopath()
-    {
-        //...
-    }
 
     public function idGenerate()
     {

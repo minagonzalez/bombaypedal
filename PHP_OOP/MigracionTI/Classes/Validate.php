@@ -61,9 +61,15 @@ class Validate
         
     }
 
-    public static function loginValidate()
+    public static function passwordValidate($password, $objectPassword)
     {
-        //...
+        return password_verify($password, $objectPassword);
+    }
+
+    public static function loginValidate($password, User $user)
+    {
+        return self::passwordValidate($password, $user->getPassword());
+
     }
 
 }

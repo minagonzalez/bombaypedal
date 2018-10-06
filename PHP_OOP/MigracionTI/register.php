@@ -1,37 +1,38 @@
 <?php
-require 'funciones.php';
+//require 'funciones.php';
 require 'loader.php';
 
 
-if(check()) {
+if(Auth::check()) {
     redirect('perfil.php');
 }
 
 if ($_POST) {
 
+    $errors = [];
+    //De entrada instancio mi usuario
     $usuario = new User($_POST['username'], $_POST['email'], $_POST['password']);
+
+    //Genero los errores si los hubiera
     $errors = Validate::registerValidate($usuario, $_POST);
+
+    if($_FILES['avatar']['error'] == 0) {
+        $errors = $db->saveAvatar($_POST);
+        if(count($errors) === 0 ) {
+            $avatar = $db->photopath($_POST);
+            $usuario->setAvatar($avatar);
+
+        }
+    }
+
     if (count($errors) === 0) {
         $usuarioArray = $db->createUser($usuario);
         $db->saveUser($usuarioArray);
-
-        redirect(login.php);
+        redirect('login.php');
     }
 
     $usuario = createUser($_POST);
 
-    if($_FILES['avatar']['error'] == 0) {
-        $avatarErrors = validateAvatar($_POST);
-        $usuario['avatar'] = photoPath($_POST);
-        if(!empty($avatarErrors)) {
-            $errors = array_merge($errors, $avatarErrors); 
-        }
-    }
-
-    if(count($errors) == 0) { 
-        saveUser($usuario);
-        redirect('login.php');
-    }
 }
    
 ?>

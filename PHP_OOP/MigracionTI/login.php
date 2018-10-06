@@ -1,5 +1,5 @@
 <?php
-require 'funciones.php';
+//require 'funciones.php';
 require 'loader.php';
 
 if(Auth::check()) {
@@ -7,32 +7,40 @@ if(Auth::check()) {
 }
 
 if($_POST) {
-    $user = $db->emailDbSearch($_POST['email']);
-    if($user !== null) {
-        if(password_verify($_POST['password'], $user['password']) == true) {
-            Auth::login();
-            redirect('perfil.php');
-        } 
+    $usuarioArray = $db->emailDbSearch($_POST['email']);
+    $user = new User($usuarioArray['username'], $usuarioArray['email'], $usuarioArray['password'], $usuarioArray['role']);
+    $arrayErr = [];
+
+    if($usuarioArray !== null) {
+        $error = "Nombre de usuario o pass incorrectos";
+        !Validate::loginValidate($_POST['password'], $user) ? $arrayErr['login'] = $error : Auth::login($user);
+        redirect('perfil.php');
+
     }
 }
 
-?>  
+?> 
 <!DOCTYPE html>
 <html>
     <?php require 'head.php';?>
     <body>
         <div class="container">
-        
-            <?php require 'navbar.php'; ?>
 
+        <?php require 'navbar.php'; ?>
+
+        <?php if(!empty($arrayErr)): ?>
+            <div class="alert alert-danger col-4">
+                <strong><?=$arrayErr['login']; ?></strong>
+            </div>
+        <?php endif; ?>
             <form class="form form-group row col-5" action="" method="post">
-                <div class="form-group">
+                <div class="form-group col-12">
                     <label for="mail">E-Mail: </label>
-                    <input type="email" name="email" id="mail" value="">
+                    <input class="form-control" type="email" name="email" id="mail" value="">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-12">
                     <label for="password">Password: </label>
-                    <input type="password" name="password" id="password" value="">
+                    <input class="form-control" type="password" name="password" id="password" value="">
                 </div>
                 <div class="form-group col-12">
                     <button type="submit" class="btn btn-info">Ingresar</button>

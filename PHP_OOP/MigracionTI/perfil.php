@@ -1,20 +1,20 @@
 <?php
-    require 'funciones.php';
+    //require 'funciones.php';
     require 'loader.php';
 
-    // if(guest()) {
-    //     redirect('register.php');
-    // }
-    // si me llega una $_SESSION con la key 'email' seteada...
+    if (Auth::guest()) {
+        redirect('login.php');
+    }
+
     if(isset($_SESSION['email'])) {
-        // buscame el usuario por mail y guardalo en $user (necesitamos usar los otros datos y solamente tenemos el email guardado en session!)
-        $user = $db->emailDbSearch($_SESSION['email']);
-        // asigname a $username el nombre de usuario
-        $username = $user['username'];
-        // Si tiene una foto de perfil, va a tener una key 'avatar' seteada...
-        if(array_key_exists('avatar', $user)){
-            // Entonces asigname el valor de esa key a la variable $avatar
-            $avatar = $user['avatar'];
+
+        $usuarioArray = $db->emailDbSearch($_SESSION['email']);
+        $user = new User($usuarioArray['username'], $usuarioArray['email'], $usuarioArray['password'], $usuarioArray['role']);
+
+        $username = $user->getUsername();
+
+        if ($user->getavatar() !== null) {
+            $avatar = $user->getAvatar();
         }
     }
 
@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="card col-4">
                     <?php //si NO TIENE AVATAR ?>
-                    <?php if(!isset($user['avatar'])):?>
+                    <?php if($avatar !== ""):?>
                     <?php //si Cargame la imagen de d10s ?>
                     <img class="card-img-top" src="img/default.jpg" alt="avatar default">
                     <?php else: ?>

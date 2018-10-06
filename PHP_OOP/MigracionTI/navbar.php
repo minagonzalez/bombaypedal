@@ -3,22 +3,24 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
 
-            <?php if(Auth::guest()): ?>
+        <?php if(Auth::guest()): ?>
 
             <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
             <li class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
 
-            <?php else: ?>
+        <?php else: ?>
 
             <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
 
-            <?php endif; ?>
+        <?php endif; ?>
             
-            <?php if(isset($_SESSION['email'])):
-                    if(Auth::checkRole($_SESSION['email']) == true): ?>
+        <?php if(isset($_SESSION['email'])): ?>
+
+            <?php if(Auth::checkRole($db, $user)): ?>
                 <li class="nav-item"><a class="nav-link" href="backend.php">Administrar</a></li>
             <?php endif; ?>
-            <?php endif; ?>
+            
+        <?php endif; ?>
             
         </ul>
     </div>

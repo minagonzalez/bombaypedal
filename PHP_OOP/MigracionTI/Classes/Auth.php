@@ -1,6 +1,6 @@
 <?php
 
-
+// Clase Auth (por "Authentication")
 class Auth
 {
     public static function set()
@@ -9,35 +9,45 @@ class Auth
             session_start();
         }
     }
-    // 1 - Login
-    public static function login()
+    public static function login(User $user)
     {
-        $_SESSION['email'] = $user['email'];
-        setcookie('email', $user['email'], time() + 3600 * 24 * 7, "/");
+        $email = $user->getEmail();
+        $_SESSION['email'] = $email;
+        self::cookieUp($email);
     }
-    // 2 - Logout
+
+    private static function cookieUp($email)
+    {
+        setcookie('email', $email, time() + 3600 * 24 * 7, "/");
+    }
+
+    private static function cookieDown()
+    {
+        setcookie('email', null, time() -1);
+    }
+
     public static function logout()
     {
         if (!isset($_SESSION)) {
             session_start();
         }
         session_destroy();
-        setcookie('email', null, time() -1);
+        self::cookieDown();
     }
-    // 3 - Helper check
+ 
     public static function check()
     {
         return isset($_SESSION['email']);
     }
+
     public static function guest()
     {
         return !self::check();
     }
 
-    public static function checkRole(DB $db, $email)
+    public static function checkRole(DB $db, User $user)
     {
-        $user = $db->emailDbSearch($email);
-        if ($user['role'] == 7) {
+        if ($user->getRole() == 7) {
             return true;
         } else {
             return false;
